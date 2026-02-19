@@ -1,3 +1,5 @@
+#PMF OF 1 DICE ROLL
+
 import pandas as pd        # Used for data handling and analysis
 import random              # Used to generate random integers
 import numpy as np         # (Not used here, but typically for numerical operations)
@@ -21,3 +23,35 @@ s  # Displays the empirical Probability Mass Function (PMF)
 # Plot the PMF as a bar chart
 s.plot(kind='bar')
 
+
+
+
+##############################################################################################################################
+#PMF OF 2 DICE ROLL
+
+# Create an empty list to store the sum of two dice
+l = []
+
+# Repeat the experiment 10,000 times (simulation)
+for i in range(10000):
+
+    # Generate first dice roll (random integer between 1 and 6)
+    a = random.randint(1, 6)
+
+    # Generate second dice roll (random integer between 1 and 6)
+    b = random.randint(1, 6)
+
+    # Append the sum of the two dice to the list
+    l.append(a + b)
+
+# Convert the list into a Pandas Series
+# value_counts() counts how many times each sum appears
+# Dividing by total count gives probability (PMF)
+# sort_index() arranges sums from 2 to 12 in order
+s = (pd.Series(l).value_counts() / pd.Series(l).value_counts().sum()).sort_index()
+
+# Display the empirical Probability Mass Function (PMF)
+print(s)
+
+# Plot the PMF as a bar chart
+s.plot(kind='bar')
