@@ -1,1 +1,23 @@
-happy
+import pandas as pd        # Used for data handling and analysis
+import random              # Used to generate random integers
+import numpy as np         # (Not used here, but typically for numerical operations)
+
+l = []  # Empty list to store simulated dice outcomes
+
+# Simulate rolling a dice 10,000 times
+for i in range(10000):
+    l.append(random.randint(1, 6))  
+    # random.randint(1, 6) generates a random integer between 1 and 6 (inclusive)
+
+# Convert list into a Pandas Series and calculate relative frequency
+s = (pd.Series(l).value_counts() / pd.Series(l).value_counts().sum()).sort_index()
+
+# value_counts() counts occurrences of each dice face
+# Dividing by total count gives probability (PMF)
+# sort_index() ensures results are ordered from 1 to 6
+
+s  # Displays the empirical Probability Mass Function (PMF)
+
+# Plot the PMF as a bar chart
+s.plot(kind='bar')
+
